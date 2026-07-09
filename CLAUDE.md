@@ -31,15 +31,24 @@ Este proyecto trata el duelo por un hijo. Reglas de tono para cualquier texto, c
 5. Textos en ES primero; estructura preparada para EN.
 6. Conventional Commits; TS strict.
 
-## Plan de construcción sugerido
+## Estado actual (julio 2026)
 
-1. **Esqueleto**: Vite + TS + canvas full-viewport + loop de render con `requestAnimationFrame`.
-2. **Campo de estrellas**: generación determinista (seed fija — el cielo de Iñigo es siempre el mismo), 3 capas de parallax, titilar con ruido desfasado.
-3. **La estrella de Iñigo**: color cálido, halo, interacción de proximidad y click según DESIGN.md.
-4. **La historia**: overlay de texto secuencial (contenido provisto por David), cierre → constelación Iñigo–Iñaki.
-5. **Pulido**: reduced-motion, giroscopio móvil, estrella fugaz ocasional, audio opcional.
-6. **Deploy**: CI + GitHub Pages + Lighthouse (Perf y A11y ≥ 95).
-7. **v2** (rama aparte hasta que v1 esté aprobada por David): esquema Supabase, "enciende una estrella", moderación, permalinks.
+La v1 base está **implementada**, portada del diseño original hecho en Claude Design:
+
+- `src/main.ts`: clase `Sky` con todo el cielo — estrellas deterministas (seed `20180531`, la fecha de nacimiento de los gemelos; el cielo es siempre el mismo), 3 capas de parallax (mouse + giroscopio), titilar con doble seno desfasado, la estrella de Iñigo (cálida, halo que respira) y la de Iñaki (menor, brilla sincronizada), historia en overlay con líneas secuenciales, constelación que se dibuja al cerrar la historia por primera vez, estrellas fugaces ocasionales, audio ambiental generado con osciladores (off por defecto), `prefers-reduced-motion`.
+- `index.html` + `src/style.css`: estructura y estilos según DESIGN.md.
+- CI con deploy a GitHub Pages (`.github/workflows/ci.yml`).
+
+El texto de la historia (constante `STORY` en main.ts) viene del diseño aprobado por David — cualquier cambio pasa por él.
+
+## Pendiente / backlog
+
+1. Verificación en dispositivos reales: 60 fps en móvil gama media, giroscopio iOS (requiere permiso `DeviceOrientationEvent.requestPermission` — no implementado aún).
+2. Interacción táctil: en móvil no hay mousemove — decidir cómo se descubre la estrella (¿tap directo? ¿pulso sutil periódico que la insinúe?).
+3. Lighthouse ≥ 95 (Perf y A11y); revisar foco/escape del diálogo de la historia (hoy solo cierra con click).
+4. Favicon/OG image (una estrella cálida sobre `#050810`).
+5. i18n EN de la historia.
+6. **v2** (rama aparte hasta que David apruebe la v1 en producción): esquema Supabase, "enciende una estrella", moderación previa a publicar, permalinks `/#star=<id>`.
 
 ## Contexto de portafolio
 
