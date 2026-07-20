@@ -17,12 +17,12 @@ El objetivo de esta fase es uno solo: **que David e Iñaki lo visiten y sientan 
 - [x] README al día: estado real del proyecto, URL de la demo y link de LICENSE propio (2026-07-19)
 - [x] Favicon + imagen OG (2026-07-19): `public/favicon.svg` y `public/og.png` — el mismo cielo (seed `20180531`), generado sin dependencias por `scripts/generate-og.mjs` (`npm run assets`); ícono táctil 180×180 incluido
 - [x] Accesibilidad de la historia (2026-07-19): `role="dialog"` + `aria-modal`, cierre con Escape, foco al abrir y restaurado al cerrar, botón sr-only «Leer la historia de Iñigo» para teclado y lectores de pantalla (visible solo al enfocarlo con Tab)
-- [x] Interacción táctil en móvil (2026-07-19): en pantallas sin hover, cada ~38 s la estrella de Iñigo respira más hondo durante 2.6 s — una insinuación, no una flecha; cesa cuando la historia ya fue encontrada. Tap con radio ampliado (64 px). **David valida en su teléfono si la insinuación se queda**
-- [x] Giroscopio en iOS (2026-07-19): `DeviceOrientationEvent.requestPermission()` enganchado al primer toque en el cielo, sin popups propios; si se deniega, el cielo queda quieto. **Falta probar en un iPhone real**
-- [ ] Verificación en dispositivos reales: 60 fps sostenidos en un teléfono de gama media de 2022, sin calentar el equipo (criterio 3 del BRIEF)
-- [ ] Lighthouse en producción ≥ 95 en Performance y Accessibility
-- [ ] Release v1.0.0 (tag + GitHub Release + `CHANGELOG.md`, mismo estándar que mi-album)
-- [ ] **Hito: David e Iñaki visitan el cielo y es *su* lugar** 🎯 — este hito no lo cierra un test; lo cierran ellos
+- [x] Interacción táctil en móvil (2026-07-19): en pantallas sin hover, cada ~38 s la estrella de Iñigo respira más hondo durante 2.6 s — una insinuación, no una flecha; cesa cuando la historia ya fue encontrada. Tap con radio ampliado (64 px). Validada por David en su teléfono (2026-07-19): la insinuación se queda
+- [x] Giroscopio en iOS (2026-07-19): `DeviceOrientationEvent.requestPermission()` enganchado al primer toque en el cielo, sin popups propios; si se deniega, el cielo queda quieto. Validado por David en dispositivo real (2026-07-19)
+- [x] Verificación en dispositivos reales: validada por David en su teléfono (2026-07-19)
+- [x] Lighthouse en producción (móvil simulado, 2026-07-19): **Performance 95 · Accessibility 100** — FCP/LCP 1.7 s, TBT 0 ms, CLS 0. Lo único que pesa es la fuente de Google; auto-hospedarla queda como mejora opcional de Fase 2
+- [x] Release v1.0.0 (tag + GitHub Release + `CHANGELOG.md`, mismo estándar que mi-album) — 2026-07-19
+- [~] **Hito: David e Iñaki visitan el cielo y es *su* lugar** 🎯 — David ya validó la experiencia; la visita de los dos juntos lo cierra
 
 ## Fase 2 — v1.1 «El cielo vive» (agosto–septiembre 2026)
 

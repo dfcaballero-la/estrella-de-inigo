@@ -2,7 +2,7 @@
 
 > Un cielo estrellado interactivo en memoria de Iñigo Francisco Caballero, y un lugar donde otras familias pueden encender una estrella para quienes aman.
 
-**Estado:** 🌔 v1 en línea, pulido en curso · **Licencia:** MIT · **Demo:** [dfcaballero-la.github.io/estrella-de-inigo](https://dfcaballero-la.github.io/estrella-de-inigo/)
+**Estado:** 🌕 v1.0.0 en producción · **Licencia:** MIT · **Demo:** [dfcaballero-la.github.io/estrella-de-inigo](https://dfcaballero-la.github.io/estrella-de-inigo/)
 
 ## La historia
 
