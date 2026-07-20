@@ -21,11 +21,12 @@ Este proyecto convierte esa imagen en un lugar real: un cielo que cualquiera pue
 |-----------|-----------|
 | [docs/BRIEF.md](docs/BRIEF.md) | Visión, experiencia, alcance v1/v2, requisitos |
 | [docs/DESIGN.md](docs/DESIGN.md) | Dirección visual, interacción y sonido (para Claude Design) |
+| [docs/ROADMAP.md](docs/ROADMAP.md) | Fases, hitos y plan v1 → v2 |
 | [CLAUDE.md](CLAUDE.md) | Guía para agentes: stack, reglas, plan de construcción |
 
 ## Licencia
 
-[MIT](../mi-album/LICENSE) © David Caballero
+[MIT](LICENSE) © David Caballero
 
 ---
 

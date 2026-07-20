@@ -4,7 +4,7 @@
 
 La Estrella de Iñigo: experiencia web contemplativa en memoria de Iñigo Francisco Caballero (31 may – 21 jun 2018), hermano gemelo de Iñaki. v1 es un cielo estrellado generativo con su historia; v2 lo abre como memorial colectivo donde otras familias encienden estrellas.
 
-**Lee primero:** `docs/BRIEF.md` (experiencia y alcance) y `docs/DESIGN.md` (dirección visual — es vinculante, no sugerencia).
+**Lee primero:** `docs/BRIEF.md` (experiencia y alcance), `docs/DESIGN.md` (dirección visual — es vinculante, no sugerencia) y `docs/ROADMAP.md` (fases, hitos y qué va en cada versión).
 
 ## Sensibilidad
 
