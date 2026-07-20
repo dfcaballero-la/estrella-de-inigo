@@ -48,6 +48,41 @@ a:hover {
   display: none;
 }
 
+#story:focus {
+  outline: none;
+}
+
+/* Visible solo para lectores de pantalla y navegación por teclado. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.sr-only:focus-visible {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 8px 14px;
+  clip-path: none;
+  top: 16px;
+  left: 16px;
+  background: rgba(4, 7, 14, 0.85);
+  color: #dde4f0;
+  border: 1px solid rgba(143, 168, 204, 0.4);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  z-index: 2;
+}
+
 #story .lines {
   max-width: 34em;
   display: flex;

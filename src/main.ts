@@ -48,7 +48,11 @@ class Sky {
   private readonly audioBtn = document.getElementById('audio') as HTMLButtonElement;
   private readonly ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
 
+  private readonly openBtn = document.getElementById('open-story') as HTMLButtonElement;
+
   private readonly reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /** Sin hover no hay mousemove: la estrella se insinúa sola y el tap es más generoso. */
+  private readonly touch = window.matchMedia('(hover: none)').matches;
 
   private w = 0;
   private h = 0;
@@ -69,6 +73,8 @@ class Sky {
   private nearStar = false;
   private constellation = false;
   private constStart = 0;
+  private lastFocus: HTMLElement | null = null;
+  private gyroAsked = false;
 
   private shoot: ShootingStar | null = null;
   private shootNext = 55 + Math.random() * 35;
@@ -88,7 +94,15 @@ class Sky {
     });
     this.root.addEventListener('mousemove', (e) => this.onMove(e));
     this.root.addEventListener('click', (e) => this.onSkyClick(e));
+    this.root.addEventListener('pointerdown', () => this.askGyro());
     this.story.addEventListener('click', () => this.closeStory());
+    this.openBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!this.storyOpen) this.openStory();
+    });
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.storyOpen) this.closeStory();
+    });
     this.audioBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       this.toggleAudio();
@@ -212,11 +226,21 @@ class Sky {
     const breathe = 1 + 0.06 * Math.sin((t * 2 * Math.PI) / 5);
     const sync = 0.75 + 0.25 * Math.sin((t * 2 * Math.PI) / 4.2);
 
+    // Insinuación táctil: sin cursor que se acerque, cada ~38 s la estrella
+    // respira más hondo durante 2.6 s. Cesa cuando la historia ya fue encontrada.
+    let hint = 0;
+    if (this.touch && !this.constellation && !this.storyOpen) {
+      const ht = (t - 14) % 38;
+      if (ht > 0 && ht < 2.6) {
+        hint = Math.sin((Math.PI * ht) / 2.6) * (this.reduced ? 0.5 : 1);
+      }
+    }
+
     if (born > 0) {
-      const hr = 30 * this.halo * breathe;
+      const hr = 30 * this.halo * breathe * (1 + 0.55 * hint);
       const g = ctx.createRadialGradient(ix, iy, 0, ix, iy, hr);
-      g.addColorStop(0, `rgba(255, 217, 142, ${0.5 * sync * born})`);
-      g.addColorStop(0.35, `rgba(255, 217, 142, ${0.14 * sync * born})`);
+      g.addColorStop(0, `rgba(255, 217, 142, ${(0.5 + 0.2 * hint) * sync * born})`);
+      g.addColorStop(0.35, `rgba(255, 217, 142, ${(0.14 + 0.06 * hint) * sync * born})`);
       g.addColorStop(1, 'rgba(255, 217, 142, 0)');
       ctx.fillStyle = g;
       ctx.beginPath();
@@ -318,7 +342,21 @@ class Sky {
 
   private onSkyClick(e: MouseEvent): void {
     if (this.storyOpen) return;
-    if (this.starDist(e.clientX, e.clientY) < 48) this.openStory();
+    if (this.starDist(e.clientX, e.clientY) < (this.touch ? 64 : 48)) this.openStory();
+  }
+
+  /**
+   * iOS exige un gesto del usuario para `DeviceOrientationEvent.requestPermission()`.
+   * Se pide una sola vez, en el primer toque al cielo; si se deniega, el cielo
+   * queda quieto y sigue siendo hermoso. Sin popups propios.
+   */
+  private askGyro(): void {
+    if (this.gyroAsked || !this.touch || this.reduced) return;
+    this.gyroAsked = true;
+    const doe = DeviceOrientationEvent as unknown as {
+      requestPermission?: () => Promise<string>;
+    };
+    doe.requestPermission?.().catch(() => undefined);
   }
 
   private openStory(): void {
@@ -335,12 +373,16 @@ class Sky {
     });
     this.story.replaceChildren(lines);
     this.story.hidden = false;
+    this.lastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    this.story.focus();
   }
 
   private closeStory(): void {
     this.storyOpen = false;
     this.story.hidden = true;
     this.constellation = true;
+    this.lastFocus?.focus();
+    this.lastFocus = null;
   }
 
   /** Pad ambiental generado con osciladores — sin archivos, sin licencias. */

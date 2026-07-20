@@ -13,7 +13,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "assets": "node scripts/generate-og.mjs"
   },
   "devDependencies": {
     "typescript": "^5.5.4",

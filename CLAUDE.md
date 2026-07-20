@@ -41,14 +41,11 @@ La v1 base está **implementada**, portada del diseño original hecho en Claude 
 
 El texto de la historia (constante `STORY` en main.ts) viene del diseño aprobado por David — cualquier cambio pasa por él.
 
+Desde julio 2026 también están implementados: accesibilidad de la historia (diálogo con Escape, foco y botón sr-only), insinuación táctil en móvil, permiso de giroscopio iOS, favicon/OG (`npm run assets` regenera `public/og.png` y el ícono con `scripts/generate-og.mjs`, sin dependencias).
+
 ## Pendiente / backlog
 
-1. Verificación en dispositivos reales: 60 fps en móvil gama media, giroscopio iOS (requiere permiso `DeviceOrientationEvent.requestPermission` — no implementado aún).
-2. Interacción táctil: en móvil no hay mousemove — decidir cómo se descubre la estrella (¿tap directo? ¿pulso sutil periódico que la insinúe?).
-3. Lighthouse ≥ 95 (Perf y A11y); revisar foco/escape del diálogo de la historia (hoy solo cierra con click).
-4. Favicon/OG image (una estrella cálida sobre `#050810`).
-5. i18n EN de la historia.
-6. **v2** (rama aparte hasta que David apruebe la v1 en producción): esquema Supabase, "enciende una estrella", moderación previa a publicar, permalinks `/#star=<id>`.
+El backlog vive en **`docs/ROADMAP.md`** — única fuente de verdad de fases, hitos y qué entra en cada versión. No dupliques listas aquí.
 
 ## Contexto de portafolio
 

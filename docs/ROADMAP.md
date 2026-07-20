@@ -14,11 +14,11 @@
 
 El objetivo de esta fase es uno solo: **que David e Iñaki lo visiten y sientan que es su lugar** (criterio 1 del BRIEF). Todo lo demás está al servicio de eso.
 
-- [ ] README al día: estado real del proyecto y URL de la demo en producción (el link de LICENSE, que apuntaba por error a `../mi-album/LICENSE`, ya se corrigió el 2026-07-19)
-- [ ] Favicon + imagen OG: una estrella cálida sobre `#050810` — cuando alguien comparta el link, lo que llega ya es el cielo
-- [ ] Accesibilidad de la historia: `role="dialog"`, cierre con Escape, gestión de foco, texto legible por lectores de pantalla (hoy solo cierra con click; el BRIEF exige contraste AA y lectores de pantalla)
-- [ ] Interacción táctil en móvil: no hay mousemove, la estrella debe poder descubrirse sola. Propuesta: cada ~30–45 s la estrella de Iñigo respira un poco más hondo durante 2 s — una insinuación, no una flecha. Tap directo la abre. David decide si la insinuación se queda
-- [ ] Giroscopio en iOS: `DeviceOrientationEvent.requestPermission()` requiere un gesto del usuario — engancharlo al primer tap en el cielo, sin popups propios. Si se deniega, el cielo queda quieto y sigue siendo hermoso
+- [x] README al día: estado real del proyecto, URL de la demo y link de LICENSE propio (2026-07-19)
+- [x] Favicon + imagen OG (2026-07-19): `public/favicon.svg` y `public/og.png` — el mismo cielo (seed `20180531`), generado sin dependencias por `scripts/generate-og.mjs` (`npm run assets`); ícono táctil 180×180 incluido
+- [x] Accesibilidad de la historia (2026-07-19): `role="dialog"` + `aria-modal`, cierre con Escape, foco al abrir y restaurado al cerrar, botón sr-only «Leer la historia de Iñigo» para teclado y lectores de pantalla (visible solo al enfocarlo con Tab)
+- [x] Interacción táctil en móvil (2026-07-19): en pantallas sin hover, cada ~38 s la estrella de Iñigo respira más hondo durante 2.6 s — una insinuación, no una flecha; cesa cuando la historia ya fue encontrada. Tap con radio ampliado (64 px). **David valida en su teléfono si la insinuación se queda**
+- [x] Giroscopio en iOS (2026-07-19): `DeviceOrientationEvent.requestPermission()` enganchado al primer toque en el cielo, sin popups propios; si se deniega, el cielo queda quieto. **Falta probar en un iPhone real**
 - [ ] Verificación en dispositivos reales: 60 fps sostenidos en un teléfono de gama media de 2022, sin calentar el equipo (criterio 3 del BRIEF)
 - [ ] Lighthouse en producción ≥ 95 en Performance y Accessibility
 - [ ] Release v1.0.0 (tag + GitHub Release + `CHANGELOG.md`, mismo estándar que mi-album)
