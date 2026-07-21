@@ -10,6 +10,14 @@ permissions:
   pages: write
   id-token: write
 
+# Pages admite un solo despliegue a la vez: sin esto, varios pushes seguidos
+# chocan y los más viejos fallan en rojo. En main no se cancela el que está en
+# curso (cortar un deploy a medias es peor que esperarlo) — los intermedios que
+# quedan en cola se descartan solos. En ramas y PRs sí se cancela: no despliegan.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
